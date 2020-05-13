@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} {% trans 'Novo Usuário' %} {% endblock %}
+{% block content_title %}
+<h3 class="d-flex align-items-middle">
+	<i class="fas fa-lock fa-fw"></i> 
+	{% trans 'Novo Usuário' %}
+</h3> 
+<hr/>
+{% endblock %}
+
+{% block content %}
+<div class="w-50 mx-auto border p-5">
+	<form method="post">
+		{% csrf_token %}
+		{% if form.non_field_errors %}
+		<ul>
+			{% for error in form.non_field_errors %}
+			<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% for hidden_field in form.hidden_fields %}
+		{% if hidden_field.errors %}
+		<ul>
+			{% for error in hidden_field.errors %}
+			<li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{{ hidden_field }}
+		{% endfor %}
+
+		<div class="form-group">
+			<label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+			<input type="text" class="form-control" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.name }}" required="" autocomplete="none" autofocus="" {% if form.first_name.value != None %}value="{{ form.first_name.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.first_name.field.max_length }}"/>
+			{{ form.first_name.errors }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+			<input type="text" class="form-control" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.name }}" required="" autocomplete="none" autofocus="" {% if form.last_name.value != None %}value="{{ form.last_name.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.last_name.field.max_length }}"/>
+			{{ form.last_name.errors }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+			<input type="text" class="form-control" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" required="" autocomplete="none" autofocus="" {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.email.field.max_length }}"/>
+			{{ form.email.errors }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+			<input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required="" autocomplete="none" autofocus="" {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.username.field.max_length }}"/>
+			{{ form.username.errors }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+			<input type="password" class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" required="" autocomplete="none" autofocus="" {% if form.password1.value != None %}value="{{ form.password1.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.password1.field.max_length }}"/>
+			{{ form.password1.errors }}
+		</div>
+		<div class="form-group">
+			<label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+			<input type="password" class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" required="" autocomplete="none" autofocus="" {% if form.password2.value != None %}value="{{ form.password2.value|stringformat:'s' }}"{% endif %}  maxlength="{{ form.password2.field.max_length }}"/>
+			{{ form.password2.errors }}
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Salvar" />
+			<a href="javascript: history.back();" class="btn btn-danger">Cancelar</a>
+		</div>
+	</form>
+</div>
+{% endblock %}

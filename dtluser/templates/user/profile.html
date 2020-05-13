@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %} {% trans 'Profile' %} {% endblock %}
+{% block content_title %}
+<h3 class="d-flex align-items-middle">
+	<i class="fas fa-user fa-fw"></i>
+	{% trans 'Profile' %}
+</h3>
+<hr/>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-3 text-center">
+		{% if user.profile.picture %}
+		<img src="{{ user.profile.picture.url }}" class="img-thumbnail" alt="">
+		{% else %}
+		<i class="fas fa-user fa-10x m-3 img-thumbnail p-5"></i>
+		{% endif %}
+		<a href="{% url 'user:edit' %}" class="btn btn-info btn-block">Editar Perfil</a>
+	</div>
+	<div class="col-md-9 p-3">
+		<dl>
+			<dt>Nome:</dt>
+			<dd>{{ user.first_name }}</dd>
+			<dt>Sobrenome:</dt>
+			<dd>{{ user.last_name }}</dd>
+			<dt>Usuário:</dt>
+			<dd>{{ user.username }}</dd>
+			<dt>E-mail:</dt>
+			<dd>{{ user.email }}</dd>
+		</dl>
+	</div>
+</div>
+
+{% endblock %}

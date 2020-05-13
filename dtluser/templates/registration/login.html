@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+<div class="card mt-5 mx-auto text-center p-3" style="width: 400px;">
+    <i class="fas fa-user fa-4x"></i>
+    <small class="text-muted h4 mt-4">Login de Usuário</small>
+    <div class="card-body text-left">
+        {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Login inválido!</strong> O usuário ou senha, estão incorretos.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" name="{{ form.username.name }}" autocomplete="false" type="text" placeholder="{{ form.username.label }}"  autofocus/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="{{ form.password.name }}" autocomplete="false" type="password" placeholder="{{ form.password.label }}"  autofocus/>
+            </div>
+            <input type="submit" class="btn btn-block btn-outline-primary float-right" value="Entrar" />
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+    <p><a href="{% url 'password_reset' %}">Esqueceu sua senha?</a></p>
+</div>
+{% endblock %}
