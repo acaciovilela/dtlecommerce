@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dtlauth.apps.DtlauthConfig',
+    'home.apps.HomeConfig',
     'order.apps.OrderConfig',
 ]
 
