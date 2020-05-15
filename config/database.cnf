@@ -1,0 +1,5 @@
+[client]
+database = dtlstore
+user = dtlstore
+password = r2d2x3po
+default-character-set = utf8

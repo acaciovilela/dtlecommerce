@@ -1,0 +1,10 @@
+<h3>Categorias</h3>
+<div class="row">
+    <div class="col-12">
+        <ul>
+            {% for c in categories %}
+                <li><a href="{% url 'catalog:show_category' c.slug %}">{{ c.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

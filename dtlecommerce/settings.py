@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dtlauth.apps.DtlauthConfig',
-    'home.apps.HomeConfig',
+    'dtlcatalog.apps.DtlcatalogConfig',
     'order.apps.OrderConfig',
 ]
 
@@ -84,8 +83,10 @@ WSGI_APPLICATION = 'dtlecommerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+	       'read_default_file': os.path.join(BASE_DIR, 'config/database.cnf')
+	    }
     }
 }
 
@@ -149,3 +150,7 @@ LOGIN_EXEMPT_URLS = [
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '1025'
+
+SITE_NAME = ''
+META_KEYWORDS = ''
+META_DESCRIPTION = ''
