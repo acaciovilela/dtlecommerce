@@ -9,5 +9,4 @@ urlpatterns = [
 	path('', views.profile , name="profile"),
 	path('register/', views.register , name="register"),
 	path('edit/', views.edit , name="edit"),
-]
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,10 @@
+{% with cart_item_count as cart_count %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a href="{% url 'cart:show' %}" class="btn btn-outline-secondary nav-link">
+            <i class="fas fa-cart-plus"></i>
+            <span class="badge badge-secondary">{{ cart_count }}</span>
+        </a>
+    </li>
+</ul>
+{% endwith %}

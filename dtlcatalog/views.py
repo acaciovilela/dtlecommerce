@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import Product, Category
+from .forms import ProductAddToCartForm
+from dtlcart import cart
 
 def index(request):
     page_title = 'Catálogo de Produtos'
@@ -8,15 +10,18 @@ def index(request):
 def show_category(request, category_slug):
     c = get_object_or_404(Category, slug=category_slug)
     products = c.product_set.all()
-    page_title = c.name
-    meta_keywords = c.meta_keywords
-    meta_description = c.meta_description
-    return render(request, 'catalog/category.html', {'products': products})
+    return render(request, 'catalog/category.html', {'products': products, 'category': c})
 
 def show_product(request, product_slug):
     p = get_object_or_404(Product, slug=product_slug)
-    categories = p.categories.filter(is_active=True)
-    page_title = p.name
-    meta_keywords = p.meta_keywords
-    meta_description = p.meta_description
-    return render(request, 'catalog/product.html', {'categories': categories})
+    if request.method == 'POST':
+        print('Make a post!') #removethis
+        form = ProductAddToCartForm(request.POST)
+        if form.is_valid():
+            print('Form is valid!') #removethis
+            cart.add_to_cart(request)
+            return redirect('/cart')
+    else:
+        form = ProductAddToCartForm()
+        form.fields['product_slug'].widget.attrs['value'] = product_slug
+    return render(request, 'catalog/product.html', {'product': p, 'form': form})

@@ -1,5 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h3>{{ product.name }}</h3>
+<hr/>
+<div class="row">
+    <div class="col-4">
+        <img src="{{ product.image.url }}" height="200" width="200" alt="{{ product.name }}">
+    </div>
+    <div class="col-8">
+        <dl class="">
+            <dt>Marca</dt>
+            <dd>{{ product.brand }}</dd>
+            <dt>Preço</dt>
+            {% if product.sale_price %}
+            <dd>
+                De <del>{{ product.old_price }}</del>
+                Por <strong>{{ product.price }}</strong>
+            </dd>
+            {% else %}
+            <dd><strong class="fa fa-2x">{{ product.price }}</strong></dd>
+            {% endif %}
+        </dl>
+        <form method="post" action="." class="cart">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Comprar" name="submit" alt="Comprar" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+<div class="mt-5">
+    <h5>Descrição</h5>
+    {{ product.description }}
+</div>
 {% endblock %}

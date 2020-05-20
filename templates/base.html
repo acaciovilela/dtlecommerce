@@ -1,4 +1,4 @@
-{% load static %} <!doctype html>
+{% load static %}{% load catalog_tags %} <!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -13,10 +13,16 @@
 </head>
 <body>
     {% include 'includes/header.html' %}
-    <div class="container">
-        {% include 'categories.html' %}
+    <div class="container-fluid">
         {% block content_title %} {{ title }} {% endblock %}
-        {% block content %} {% endblock %}
+        <div class="row">
+            <div class="col-lg-2">
+                {% category_list request.path %}
+            </div>
+            <div class="col-lg-10">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
     </div>
     {% include 'includes/footer.html' %}
     <script src="{% static 'js/jquery.js' %}" crossorigin="anonymous"></script>
