@@ -32,6 +32,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'dtluser.apps.DtluserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'catalog.apps.CatalogConfig',
     'cart.apps.CartConfig',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +93,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
 	       'read_default_file': os.path.join(BASE_DIR, 'config/database.cnf')
-	    }
+	    },
+        'TEST': {
+            
+        },
     }
 }
 
@@ -157,3 +162,14 @@ EMAIL_PORT = '1025'
 SITE_NAME = ''
 META_KEYWORDS = ''
 META_DESCRIPTION = ''
+
+# Channels
+ASGI_APPLICATION = 'dtlecommerce.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

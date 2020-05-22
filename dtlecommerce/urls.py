@@ -12,4 +12,5 @@ urlpatterns = [
     path('user/', include('dtluser.urls')),
     path('catalog/', include('catalog.urls')),
     path('cart/', include('cart.urls')),
+    path('chat/', include('chat.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
