@@ -10,7 +10,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('user/', include('dtluser.urls')),
-    path('catalog/', include('dtlcatalog.urls')),
-    path('cart/', include('dtlcart.urls')),
-    path('order/', include('order.urls')),
+    path('catalog/', include('catalog.urls')),
+    path('cart/', include('cart.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

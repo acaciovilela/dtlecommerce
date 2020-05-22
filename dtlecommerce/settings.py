@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'dtlcatalog.apps.DtlcatalogConfig',
-    'dtlcart.apps.DtlcartConfig',
-    'order.apps.OrderConfig',
+    'catalog.apps.CatalogConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'dtlcatalog.context_processors.catalog',
+                'catalog.context_processors.catalog',
             ],
         },
     },
